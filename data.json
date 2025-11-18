@@ -1114,5 +1114,17 @@
     {
         "input": "hollywoo <3",
         "output": "Hollywood <3"
+    },
+    {
+        "input": "hehehe, b roll",
+        "output": "Hehehe, B-roll"
+    },
+    {
+        "input": "why pux ovr totz?",
+        "output": "Why put over tater tots?"
+    },
+    {
+        "input": "shredded, then reshaped to be round",
+        "output": "Shredded, then reshaped to be round"
     }
 ]
