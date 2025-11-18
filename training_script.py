@@ -96,10 +96,10 @@ def main():
 
         warmup_steps=15,
         per_device_train_batch_size=16,
-        gradient_accumulation_steps=5,
+        gradient_accumulation_steps=4,
 
-        learning_rate=3e-4,
-        num_train_epochs=10,
+        learning_rate=3e-5,
+        num_train_epochs=20,
 
         bf16=True,
         fp16=False,
@@ -111,7 +111,7 @@ def main():
         save_strategy="no",
         eval_strategy="no",
 
-        logging_steps=10,
+        logging_steps=5,
 
         dataloader_num_workers=0,
         dataloader_pin_memory=False,
