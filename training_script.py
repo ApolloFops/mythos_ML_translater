@@ -11,7 +11,7 @@ from transformers import (
 # ===== CONFIG =====
 MODEL_NAME = "google/flan-t5-base"
 DATA_FILE = "data.json"
-OUTPUT_DIR = "model"     # final fine-tuned model folder
+OUTPUT_DIR = "../hugging face/model"     # final fine-tuned model folder
 
 print("[DEBUG] Loading dataset...")
 dataset = load_dataset("json", data_files=DATA_FILE)["train"]
