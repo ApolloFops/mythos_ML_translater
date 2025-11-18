@@ -61,21 +61,17 @@ def main():
     # ===== TRAINING SETTINGS =====
     training_args = TrainingArguments(
         output_dir=OUTPUT_DIR,
-        per_device_train_batch_size=40,
-        gradient_accumulation_steps=8,
+        per_device_train_batch_size=64,    # max batch size for 8GB+ VRAM
+        gradient_accumulation_steps=1,     # no accumulation, full batch on GPU
         learning_rate=2e-4,
-        num_train_epochs=1500,
+        num_train_epochs=5,                # few epochs since dataset is tiny
         bf16=True,
-        fp16=False,
-        save_total_limit=10,
-        save_strategy="epoch",
-        logging_steps=15,
+        fp16=False,  
+        save_strategy="no",                # skip saving intermediate epochs to save time
+        logging_steps=10,
         report_to="none",
         dataloader_pin_memory=True,
-        dataloader_num_workers=4,
-        gradient_checkpointing=True,
     )
-
     # ===== TRAINER =====
     trainer = Trainer(
         model=model,
