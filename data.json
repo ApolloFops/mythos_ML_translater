@@ -1126,5 +1126,33 @@
     {
         "input": "shredded, then reshaped to be round",
         "output": "Shredded, then reshaped to be round"
+    },
+    {
+        "input": "hell yeh",
+        "output": "Hell yeah"
+    },
+    {
+        "input": "how dushhuu guyz plan on doin da timnt?",
+        "output": "How do you guys plan on doing the that?"
+    },
+    {
+        "input": "am curious",
+        "output": "I'm curious"
+    },
+    {
+        "input": "hw...",
+        "output": "homework..."
+    },
+    {
+        "input": "Throwing knives goatrd!!!",
+        "output": "Throwing knives is goated!!!"
+    },
+    {
+        "input": "amwould askz why yu ate itz, but know i probby woulda dun the saemn…",
+        "output": "I would ask why you ate it, but I know I probably would have done the same…"
+    },
+    {
+        "input": "also ver eepy…",
+        "output": "I'm also very sleepy…"
     }
 ]
