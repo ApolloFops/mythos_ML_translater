@@ -1174,5 +1174,589 @@
     {
         "input": "so muhc munz spending qwq",
         "output": "So much money spending qwq"
+    },
+    {
+        "input": "mmmmmmm",
+        "output": "Mmmmmmm"
+    },
+    {
+        "input": "the urge to buy a silly kei car…",
+        "output": "The urge to buy a silly kei car…"
+    },
+    {
+        "input": "hrrrrrf",
+        "output": "Hrrrrrf"
+    },
+    {
+        "input": "tuff stuff…",
+        "output": "Tough stuff…"
+    },
+    {
+        "input": "o7",
+        "output": "O7"
+    },
+    {
+        "input": "i luvr budget cutz…",
+        "output": "I love budget cuts…"
+    },
+    {
+        "input": "the blazer…",
+        "output": "The blazer…"
+    },
+    {
+        "input": "starting to wear sweaterz cuz cozy, bur stil a bit too warmn…",
+        "output": "Starting to wear sweaters because they're cozy, but still a bit too warm…"
+    },
+    {
+        "input": "i wear zip upz alot when earli-mid fol",
+        "output": "I wear zip ups a lot during early to mid fall"
+    },
+    {
+        "input": "tur…",
+        "output": "True…"
+    },
+    {
+        "input": "cropped hoodies n sweaterz :3",
+        "output": "Cropped hoodies and sweaters :3"
+    },
+    {
+        "input": "ijus wear sweaters doe",
+        "output": "I just wear sweaters though"
+    },
+    {
+        "input": "tur…",
+        "output": "True…"
+    },
+    {
+        "input": "pffwehe",
+        "output": "Pffwehe"
+    },
+    {
+        "input": "the sweater he wearin",
+        "output": "The sweater he's wearing"
+    },
+    {
+        "input": "reasonabl",
+        "output": "Reasonable"
+    },
+    {
+        "input": "you makin me wanna gay fuzzbutt max…",
+        "output": "You're making me want to gay fuzzbutt max…"
+    },
+    {
+        "input": "man",
+        "output": "Man"
+    },
+    {
+        "input": "0foxshop and angypawz…",
+        "output": "0FoxShop and AngryPawz…"
+    },
+    {
+        "input": "i missed such an enthralling debaet las ni…",
+        "output": "I missed such an enthralling debate last night…"
+    },
+    {
+        "input": "pfwehe",
+        "output": "Pfwehe"
+    },
+    {
+        "input": "i'm gunna be eepy",
+        "output": "I'm going to be sleepy"
+    },
+    {
+        "input": "nice",
+        "output": "Nice"
+    },
+    {
+        "input": "amgun bwe der",
+        "output": "I'm going to be there"
+    },
+    {
+        "input": "o",
+        "output": "Oh"
+    },
+    {
+        "input": "aws outage kinda maybe jus sounded like this apart frumn canvas",
+        "output": "The AWS outage kind of maybe sounded like this except for the canvas"
+    },
+    {
+        "input": "saemz",
+        "output": "Same"
+    },
+    {
+        "input": "gabba goo",
+        "output": "Gabba goo"
+    },
+    {
+        "input": "furdue...",
+        "output": "Purdue..."
+    },
+    {
+        "input": "yu",
+        "output": "You"
+    },
+    {
+        "input": "tiny floaty fluffy thing....",
+        "output": "Tiny floaty fluffy thing...."
+    },
+    {
+        "input": "QwQ",
+        "output": "QwQ"
+    },
+    {
+        "input": ".///.",
+        "output": ".///."
+    },
+    {
+        "input": "tortilla stripz exist",
+        "output": "Tortilla strips exist"
+    },
+    {
+        "input": "woag…",
+        "output": "Whoa…"
+    },
+    {
+        "input": "last forza i owned wuz forza motorsport...",
+        "output": "The last Forza I owned was Forza Motorsport..."
+    },
+    {
+        "input": "stop makign me hungy…",
+        "output": "Stop making me hungry…"
+    },
+    {
+        "input": "I'M TRYNA WRITR COLLEG ESSAY!!",
+        "output": "I'M TRYING TO WRITE MY COLLEGE ESSAY!!"
+    },
+    {
+        "input": "errrrm",
+        "output": "Errrm"
+    },
+    {
+        "input": "nuh uh",
+        "output": "Nuh uh"
+    },
+    {
+        "input": "i'm very 33 pilled",
+        "output": "I'm very 33-pilled"
+    },
+    {
+        "input": "bzzzzzz",
+        "output": "Bzzzzzz"
+    },
+    {
+        "input": "&rnak",
+        "output": "&rnak"
+    },
+    {
+        "input": "righ befor that the smoke towers in frunt were lit and making moke",
+        "output": "Right before that the smoke towers in front were lit and making smoke"
+    },
+    {
+        "input": "yis",
+        "output": "Yes"
+    },
+    {
+        "input": "wuz 42 dolar cuz am waited for approval to go frumn parnets qwq",
+        "output": "It was 42 dollars because I waited for approval to go from parents qwq"
+    },
+    {
+        "input": "nex time i'mma be my own bold and can buy tickets when they first come out fer 20 dolars tho",
+        "output": "Next time I'm going to be bold and can buy tickets when they first come out for 20 dollars though"
+    },
+    {
+        "input": "def would go again tho",
+        "output": "Definitely would go again though"
+    },
+    {
+        "input": "leftz wiffa signed shirt by boff JV and brae hehehe",
+        "output": "Left with a signed shirt by both JV and Brae hehehe"
+    },
+    {
+        "input": "it was onli aroun 80 buggz fer admission and shirt",
+        "output": "It was only around 80 bucks for admission and the shirt"
+    },
+    {
+        "input": "my wallet might be a lil unhappy...",
+        "output": "My wallet might be a little unhappy..."
+    },
+    {
+        "input": "but uhhh ⁠music⁠",
+        "output": "But uhhh music"
+    },
+    {
+        "input": "i went places last night :3",
+        "output": "I went places last night :3"
+    },
+    {
+        "input": "saem here tho ;w;",
+        "output": "Same here though ;w;"
+    },
+    {
+        "input": "wai tur!!!",
+        "output": "Wait true!!!"
+    },
+    {
+        "input": "my wallet might be a lil unhappy...",
+        "output": "My wallet might be a little unhappy..."
+    },
+    {
+        "input": "mmm",
+        "output": "Mmm"
+    },
+    {
+        "input": "40 dolar...",
+        "output": "40 dollars..."
+    },
+    {
+        "input": "i finks am migh preorder, but the anti-preorder bugz are also fighting that",
+        "output": "I think I might preorder, but the anti-preorder bugs are also fighting that"
+    },
+    {
+        "input": "nooooo qwq",
+        "output": "Nooooo qwq"
+    },
+    {
+        "input": "frog force…",
+        "output": "Frog force…"
+    },
+    {
+        "input": "uh ohbz…",
+        "output": "Uh oh…"
+    },
+    {
+        "input": "qwq",
+        "output": "qwq"
+    },
+    {
+        "input": "nmop, totalli don live in one",
+        "output": "Nope, totally don’t live in one"
+    },
+    {
+        "input": "lemme inyo lobbies qwq",
+        "output": "Let me into lobbies qwq"
+    },
+    {
+        "input": "sclaes redge",
+        "output": "Scales ridge"
+    },
+    {
+        "input": "woag...",
+        "output": "Whoa..."
+    },
+    {
+        "input": "they are qwq?",
+        "output": "They are qwq?"
+    },
+    {
+        "input": "ooooooohbz",
+        "output": "Ooooooh"
+    },
+    {
+        "input": "26 baja?!?",
+        "output": "26 Baja?!?"
+    },
+    {
+        "input": "woag... nyazsche",
+        "output": "Whoa... Nyazsche"
+    },
+    {
+        "input": "=w=",
+        "output": "=w="
+    },
+    {
+        "input": "especially when i get hit wiffa  fella w/ 2 rare weapons n get absolutley shreddedz qwq",
+        "output": "Especially when I get hit by a fella with two rare weapons and get absolutely shredded qwq"
+    },
+    {
+        "input": "other playerz can be scary too",
+        "output": "Other players can be scary too"
+    },
+    {
+        "input": "tur...",
+        "output": "True..."
+    },
+    {
+        "input": "saemz",
+        "output": "Same"
+    },
+    {
+        "input": "howshuu gon tint 'em?",
+        "output": "How are you going to tint them?"
+    },
+    {
+        "input": "ooo",
+        "output": "Ooo"
+    },
+    {
+        "input": "hehehe, am luvr when am motivated to artz",
+        "output": "Hehehe, I love when I'm motivated to make art"
+    },
+    {
+        "input": "ALL OUR FOOD KEEPS BLOWING UP!!!",
+        "output": "ALL OUR FOOD KEEPS BLOWING UP!!!"
+    },
+    {
+        "input": "he's listening...",
+        "output": "He's listening..."
+    },
+    {
+        "input": "o, webbax :3",
+        "output": "Oh, Webback :3"
+    },
+    {
+        "input": "izdat goat simn?",
+        "output": "Is that Goat Simulator?"
+    },
+    {
+        "input": "OOHBZ",
+        "output": "OOHBZ"
+    },
+    {
+        "input": "",
+        "output": ""
+    },
+    {
+        "input": "a bitz",
+        "output": "A bit"
+    },
+    {
+        "input": "even though i'm bald, i've learned to hayr",
+        "output": "Even though I'm bald, I've learned to hair"
+    },
+    {
+        "input": "i went bacc n fixed it up cuz i forgor she posted ref aftr maed itz :3",
+        "output": "I went back and fixed it up because I forgot she posted a reference after I made it :3"
+    },
+    {
+        "input": "long lost freya art i almost finished when she changed her naem to siliconcritters",
+        "output": "Long-lost Freya art I almost finished when she changed her name to SiliconCritters"
+    },
+    {
+        "input": "procrastination part real…",
+        "output": "Procrastination part real…"
+    },
+    {
+        "input": "oo",
+        "output": "Oo"
+    },
+    {
+        "input": "good temp",
+        "output": "Good temperature"
+    },
+    {
+        "input": "woag, close to a level ump",
+        "output": "Whoa, close to a level up"
+    },
+    {
+        "input": "&rnak",
+        "output": "&rnak"
+    },
+    {
+        "input": "woag!! izlook goo!",
+        "output": "Whoa!! It looks good!"
+    },
+    {
+        "input": "woag",
+        "output": "Whoa"
+    },
+    {
+        "input": "dey smoller but stil kewlz",
+        "output": "They're smaller but still cool"
+    },
+    {
+        "input": "weasel gear iz one i knwo of",
+        "output": "Weasel Gear is one I know of"
+    },
+    {
+        "input": "pffwehehe",
+        "output": "Pffwehehe"
+    },
+    {
+        "input": "my beloved",
+        "output": "My beloved"
+    },
+    {
+        "input": "cane suga sodr....",
+        "output": "Cane sugar soda...."
+    },
+    {
+        "input": "hehe",
+        "output": "Hehe"
+    },
+    {
+        "input": "violed",
+        "output": "Violet"
+    },
+    {
+        "input": "<3",
+        "output": "<3"
+    },
+    {
+        "input": "doc pebby…",
+        "output": "Doc Pebby…"
+    },
+    {
+        "input": "pfwehehehe",
+        "output": "Pfwehehehe"
+    },
+    {
+        "input": "freya!!!",
+        "output": "Freya!!!"
+    },
+    {
+        "input": "wyatt ishyu bacc at spirit nowes?",
+        "output": "Wyatt is he back at Spirit now?"
+    },
+    {
+        "input": "hmmm",
+        "output": "Hmm"
+    },
+    {
+        "input": "smort",
+        "output": "Smart"
+    },
+    {
+        "input": "in mage's territory…",
+        "output": "In Mage's territory…"
+    },
+    {
+        "input": "maybedas why",
+        "output": "Maybe that's why"
+    },
+    {
+        "input": "lightning or usb-C?",
+        "output": "Lightning or USB C?"
+    },
+    {
+        "input": "i'd either have to listen in my leff or righ eer",
+        "output": "I'd either have to listen in my left or right ear"
+    },
+    {
+        "input": "my lightning to 3.5 wouldn balance",
+        "output": "My Lightning to 3.5 wouldn't balance"
+    },
+    {
+        "input": "i guess a plus iz izthatz people can't tel i havr earbubz in cuz they can't sees 'em",
+        "output": "I guess a plus is that people can't tell I have earbuds in because they can't see them"
+    },
+    {
+        "input": "othrwize am all wired",
+        "output": "Otherwise I'm all wired"
+    },
+    {
+        "input": "cuz fon no hav 3.5mm jamck :(",
+        "output": "Because the phone does not have a 3.5mm jack :("
+    },
+    {
+        "input": "funny you say datz…",
+        "output": "Funny you say that…"
+    },
+    {
+        "input": "blacc?",
+        "output": "Black?"
+    },
+    {
+        "input": "oohbz",
+        "output": "Ooh"
+    },
+    {
+        "input": "i'm probby tweakin",
+        "output": "I'm probably tweaking"
+    },
+    {
+        "input": "also did yu guyz powder coat yer bot? or izdat jus lighting",
+        "output": "Also did you guys powder coat your bot? Or is that just lighting?"
+    },
+    {
+        "input": "and wiggly bot",
+        "output": "And wiggly bot"
+    },
+    {
+        "input": "shrodinger's auto score",
+        "output": "Schrodinger's auto score"
+    },
+    {
+        "input": "migraine meds, fermented bug juice, and milkster",
+        "output": "Migraine meds, fermented bug juice, and Milkster"
+    },
+    {
+        "input": "acetametophin, aspirin, and caffein all in one pill",
+        "output": "Acetaminophen, aspirin, and caffeine all in one pill"
+    },
+    {
+        "input": "what if my drugs are already caffeinated qwq?",
+        "output": "What if my drugs are already caffeinated qwq?"
+    },
+    {
+        "input": "iz this somefimg i should tries?",
+        "output": "Is this something I should try?"
+    },
+    {
+        "input": "then am migh consider itz organized chaos",
+        "output": "Then I might consider it organized chaos"
+    },
+    {
+        "input": "well, do you know wher everyfing iz?",
+        "output": "Well, do you know where everything is?"
+    },
+    {
+        "input": "qwq",
+        "output": "qwq"
+    },
+    {
+        "input": "ishlewk cleanz",
+        "output": "It looks clean"
+    },
+    {
+        "input": "pfwehehe",
+        "output": "Pfwehehe"
+    },
+    {
+        "input": "appears to be a relativli thin primnt",
+        "output": "It appears to be a relatively thin print"
+    },
+    {
+        "input": "yeag, i'd eithr do mor infil or sum bracing internally",
+        "output": "Yeah, I'd either do more infill or some bracing internally"
+    },
+    {
+        "input": "qwq",
+        "output": "qwq"
+    },
+    {
+        "input": "preach",
+        "output": "Preach"
+    },
+    {
+        "input": "wuz on a log undrwatr i lifteds",
+        "output": "I was on a log underwater I lifted"
+    },
+    {
+        "input": "foundza stonefly larvae andz anothr thing which lewks diffren but similar",
+        "output": "Found a stonefly larvae and another thing that looks different but similar"
+    },
+    {
+        "input": "hrrrm…",
+        "output": "Hrrrm…"
+    },
+    {
+        "input": "makinmehungy..",
+        "output": "Making me hungry..."
+    },
+    {
+        "input": "amthought scales jus turned ink fer sumn reasron",
+        "output": "I thought scales just turned ink for some reason"
+    },
+    {
+        "input": "mnoe",
+        "output": "No"
+    },
+    {
+        "input": "pfwehe",
+        "output": "Pfwehe"
+    },
+    {
+        "input": "reds",
+        "output": "Reds"
     }
 ]
