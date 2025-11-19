@@ -1,19 +1,18 @@
-import os
 import torch
 import warnings
-import numpy as np
 from datasets import load_dataset
 from torch.nn.utils.rnn import pad_sequence
+from datasets.utils.logging import disable_progress_bar
 from transformers import (
     AutoTokenizer,
     AutoModelForSeq2SeqLM,
     Trainer,
     TrainingArguments,
-    TrainerCallback
 )
 
-# Suppress Hugging Face FutureWarnings
+# Suppress Unwanted Warnings AND Progress Bars
 warnings.filterwarnings("ignore", category=FutureWarning)
+disable_progress_bar()
 
 def main():
     # ===== CONFIG =====
@@ -55,7 +54,7 @@ def main():
     )
     model.config.use_cache = False
     model.to(device)
-    print(f"[INFO] Model Loaded.")
+    print(f"[INFO] Model loading compleate.")
 
     # ===== LOAD DATASET =====
     print("[INFO] Loading dataset...")
@@ -122,7 +121,7 @@ def main():
         gradient_accumulation_steps=4,
 
         learning_rate=4e-4,
-        num_train_epochs=15,
+        num_train_epochs=25,
 
         bf16=use_bf16,
         tf32=use_tf32,
