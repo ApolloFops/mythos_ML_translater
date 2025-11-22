@@ -39,7 +39,7 @@ def main():
         "per_device_train_batch_size": 16,  # Batch size per GPU/CPU core
         "gradient_accumulation_steps": 4,   # Accumulate gradients over multiple steps
 
-        "num_train_epochs": 12,             # Total training epochs
+        "num_train_epochs": 22,             # Total training epochs
         "learning_rate": 4e-4,              # AdamW learning rate
         "warmup_steps": 8,                  # Number of steps to gradually increase LR
 
