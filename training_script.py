@@ -39,7 +39,7 @@ def main():
         "per_device_train_batch_size": 16,  # Batch size per GPU/CPU core
         "gradient_accumulation_steps": 4,   # Accumulate gradients over multiple steps
 
-        "num_train_epochs": 17,             # Total training epochs
+        "num_train_epochs": 12,             # Total training epochs
         "learning_rate": 4e-4,              # AdamW learning rate
         "warmup_steps": 8,                  # Number of steps to gradually increase LR
 
@@ -51,6 +51,8 @@ def main():
         "fp16": False,                      # Disable fp16 (we're using bf16 instead)
 
         "save_strategy": "no",              # Disable checkpoint saving during training
+        "save_steps": 0,
+        "save_total_limit": 0,
         "eval_strategy": "no",              # Disable evaluation during training
         "logging_steps": 5,                 # Log every N steps
 
