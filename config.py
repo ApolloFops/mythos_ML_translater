@@ -1,7 +1,12 @@
+import os
+
+PLUGIN_PATH = os.path.dirname(os.path.realpath(__file__))
+PLUGIN_CACHE_PATH = "/fritz/cache/mythos_ML_translater"
+
 # ===== CONFIG =====
 # Model and tokenizer settings
 MODEL_NAME = "google/flan-t5-base" # Hugging Face model name; supports seq2seq tasks
-DATA_FILE = "/plugins/mythos_ML_translater/data.json" # Local JSON dataset file
-MODEL_PATH = "/fritz/cache/mythos_ML_translater/model" # Directory to save model & tokenizer
+DATA_FILE = PLUGIN_PATH + "/data.json" # Local JSON dataset file
+MODEL_PATH = PLUGIN_CACHE_PATH + "/model" # Directory to save model & tokenizer
 
 LOG_COMPONENT = "MythosML"
