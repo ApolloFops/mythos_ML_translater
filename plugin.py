@@ -16,6 +16,21 @@ from scripts.tools.utility import isDeveloper
 from .config import DATA_FILE, MODEL_NAME, MODEL_PATH, LOG_COMPONENT
 
 
+class MythosTranslatorView(discord.ui.DesignerView):
+	def __init__(self, translation=""):
+		super().__init__(timeout=None)
+
+		container = discord.ui.Container(colour=discord.Colour.blurple())
+
+		title_text = discord.ui.TextDisplay("### Mythos ML")
+		container.add_item(title_text)
+
+		translation_text_display = discord.ui.TextDisplay(translation)
+		container.add_item(translation_text_display)
+
+		super().add_item(container)
+
+
 class MythosMLTranslater(commands.Cog):
 	model = None
 	tokenizer = None
@@ -38,7 +53,7 @@ class MythosMLTranslater(commands.Cog):
 		text       = message.content
 		avat       = message.author.display_avatar.url
 
-		await ctx.respond(self.translate(text))
+		await ctx.respond(view=MythosTranslatorView(self.translate(text)))
 
 	@command_group.command(name="train", description="Trains the MythosML machine learning model.")
 	@isDeveloper()
