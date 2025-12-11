@@ -194,3 +194,7 @@ class MythosMLTranslater(commands.Cog):
 
 def setup(bot):
 	bot.add_cog(MythosMLTranslater(bot))
+
+
+def teardown(bot):
+	bot.remove_cog("MythosMLTranslater")
