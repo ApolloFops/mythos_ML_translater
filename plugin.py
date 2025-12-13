@@ -48,6 +48,8 @@ class MythosMLTranslater(commands.Cog):
 
 	@commands.message_command(name="De-Mythos", contexts=CONTEXTS, integration_types=INTEGRATION_TYPES)
 	async def de_mythos(self, ctx: discord.ApplicationCommand, message: discord.Message):
+		await ctx.defer()
+
 		authorName = message.author.display_name
 		author     = message.author.id
 		text       = message.content
