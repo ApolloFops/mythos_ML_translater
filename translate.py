@@ -1,4 +1,5 @@
 import json
+import readline
 
 print("Translation Tool")
 
