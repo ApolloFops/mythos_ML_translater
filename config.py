@@ -1,7 +1,9 @@
 import os
 
+from scripts.tools.utility import getCachePath
+
 PLUGIN_PATH = os.path.dirname(os.path.realpath(__file__))
-PLUGIN_CACHE_PATH = "/fritz/cache/mythos_ML_translater"
+PLUGIN_CACHE_PATH = getCachePath("mythos_ML_translater")
 
 # ===== CONFIG =====
 # Model and tokenizer settings
