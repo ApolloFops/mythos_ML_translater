@@ -96,11 +96,16 @@ class MythosMLTranslater(commands.Cog):
 	def load_model(self) -> bool:
 		# ===== LOAD MODEL + TOKENIZER =====
 		journal.log("Loading model...", 6, component=LOG_COMPONENT)
-		self.tokenizer = AutoTokenizer.from_pretrained(MODEL_PATH)
-		self.model = T5ForConditionalGeneration.from_pretrained(MODEL_PATH)
-		self.model = self.model.to(self.device)
-		self.model.eval()
-		journal.log("Model loaded", 6, component=LOG_COMPONENT)
+
+		try:
+			self.tokenizer = AutoTokenizer.from_pretrained(MODEL_PATH)
+			self.model = T5ForConditionalGeneration.from_pretrained(MODEL_PATH)
+			self.model = self.model.to(self.device)
+			self.model.eval()
+
+			journal.log("Model loaded", 6, component=LOG_COMPONENT)
+		except:
+			journal.log("Failed to load model! This is likely because the model hasn't been trained yet.", 5, component=LOG_COMPONENT)
 
 	async def train_model(self, ctx: discord.ApplicationContext):
 		# Device and precision settings
