@@ -13,7 +13,7 @@ from resources.shared import CONTEXTS, INTEGRATION_TYPES
 from scripts.tools import journal
 from scripts.tools.utility import isDeveloper
 
-from .config import MODEL_NAME, MODEL_PATH, LOG_COMPONENT, DATABASE_PATH
+from .config import MODEL_NAME, MODEL_PATH, LOG_COMPONENT, MYTHOSAUR_USER_ID
 from .database import TranslationDatabase
 
 
@@ -58,6 +58,25 @@ class MythosMLTranslater(commands.Cog):
 		avat       = message.author.display_avatar.url
 
 		await ctx.respond(view=MythosTranslatorView(self.translate(text)))
+
+	@command_group.command(name="scrape", description="Scrapes the last 1000 messages in this channel, and adds any Mythosaur messages to the database.")
+	@isDeveloper()
+	async def scrape(self, ctx: discord.ApplicationContext):
+		await ctx.defer()
+
+		message_count = 0
+		# Fetch message history with a limit (e.g., last 1000 messages)
+		# Fetching all messages in a large server can take a very long time.
+		async for message in ctx.channel.history(limit=1000):
+			if message.author.id == MYTHOSAUR_USER_ID and message.content != '':
+				if not self.database.check_for_translation(message.id):
+					self.database.add_message(message)
+					message_count += 1
+
+		if message_count > 0:
+			await ctx.respond(f"Scraped {message_count} messages from this channel.", ephemeral=True)
+		else:
+			await ctx.respond("No messages found in this channel.", ephemeral=True)
 
 	@command_group.command(name="train", description="Trains the MythosML machine learning model.")
 	@isDeveloper()

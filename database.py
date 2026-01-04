@@ -1,20 +1,36 @@
 import sqlite3
 
+import discord
+
 from .config import DATABASE_PATH
 
-class TranslationDatabase:
+
+class TranslationDatabaseQueries:
 	create_translation_table = """
 CREATE TABLE IF NOT EXISTS translations (
-	message_text TEXT NOT NULL,
+	message_text TEXT NOT NULL CHECK (message_text <> ''),
 	message_id TEXT,
 	translation TEXT
 )
 """
 
+	check_for_translation = """
+SELECT EXISTS(SELECT 1 FROM translations WHERE message_id = "{message_id}" LIMIT 1);
+"""
+
+	write_message = """
+INSERT INTO
+	translations (message_text, message_id)
+VALUES
+	(?, ?);
+"""
+
+
+class TranslationDatabase:
 	def __init__(self):
 		# Make sure the table exists in the database
 		with self.connect_db() as db:
-			self.exec_db(db, self.create_translation_table)
+			self.exec_db(db, TranslationDatabaseQueries.create_translation_table)
 
 	def connect_db(self):
 		return sqlite3.connect(DATABASE_PATH)
@@ -26,3 +42,16 @@ CREATE TABLE IF NOT EXISTS translations (
 	def read_db(self, connection: sqlite3.Connection, query: str):
 		return connection.cursor().execute(query).fetchone()
 
+	def check_for_translation(self, message_id):
+		# Make sure the message hasn't already been starboarded
+		with self.connect_db() as db:
+			in_database = self.read_db(db, TranslationDatabaseQueries.check_for_translation.format(message_id=str(message_id)))[0]
+
+		return str(in_database) == "1"
+
+	def add_message(self, message: discord.Message):
+		with self.connect_db() as db:
+			# There might be a better way to do this but this works
+			db.cursor().execute(TranslationDatabaseQueries.write_message, (message.content, str(message.id)))
+
+			db.commit()
