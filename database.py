@@ -25,6 +25,20 @@ VALUES
 	(?, ?);
 """
 
+	find_random_untranslated = """
+SELECT message_id, message_text
+FROM translations
+WHERE translation IS NULL OR translation = ''
+ORDER BY RANDOM()
+LIMIT 1
+"""
+
+	update_translation = """
+UPDATE translations
+SET translation = ?
+WHERE message_id = ?
+"""
+
 
 class TranslationDatabase:
 	def __init__(self):
@@ -55,3 +69,11 @@ class TranslationDatabase:
 			db.cursor().execute(TranslationDatabaseQueries.write_message, (message.content, str(message.id)))
 
 			db.commit()
+
+	def get_random_untranslated(self):
+		with self.connect_db() as db:
+			return self.read_db(db, TranslationDatabaseQueries.find_random_untranslated)
+
+	def update_translation(self, message_id, translation):
+		with self.connect_db() as db:
+			db.cursor().execute(TranslationDatabaseQueries.update_translation, (translation, message_id))

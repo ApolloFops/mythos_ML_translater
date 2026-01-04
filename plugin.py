@@ -1,3 +1,5 @@
+import asyncio
+
 import torch
 from torch.nn.utils.rnn import pad_sequence
 from transformers import AutoTokenizer, T5ForConditionalGeneration
@@ -30,6 +32,30 @@ class MythosTranslatorView(discord.ui.DesignerView):
 		container.add_item(translation_text_display)
 
 		super().add_item(container)
+
+
+class TranslationModal(discord.ui.DesignerModal):
+	def __init__(self, message_text):
+		super().__init__(title="Contribute Translation")
+
+		# Used to get data back to the command
+		self.future = asyncio.get_event_loop().create_future()
+
+		message_text_display = discord.ui.TextDisplay(message_text)
+		super().add_item(message_text_display)
+
+		translation_input = discord.ui.Label(label="Translation")
+
+		translation_input.set_input_text(custom_id="translation")
+
+		super().add_item(translation_input)
+
+	async def callback(self, interaction: discord.Interaction):
+		translation = self.children[1].get_item("translation").value
+
+		self.future.set_result(translation)
+
+		await interaction.response.send_message("Translation recieved! Thanks for your help!", ephemeral=True)
 
 
 class MythosMLTranslater(commands.Cog):
@@ -77,6 +103,22 @@ class MythosMLTranslater(commands.Cog):
 			await ctx.respond(f"Scraped {message_count} messages from this channel.", ephemeral=True)
 		else:
 			await ctx.respond("No messages found in this channel.", ephemeral=True)
+
+	@command_group.command(name="contribute", description="Contribute some translations to the database!")
+	async def contribute(self, ctx: discord.ApplicationContext):
+		message = self.database.get_random_untranslated()
+
+		if not message:
+			await ctx.respond("No messages left to translate!", ephemeral=True)
+			return
+
+		message_id, message_text = message
+
+		modal = TranslationModal(message_text=message_text)
+		await ctx.send_modal(modal)
+
+		translation = await modal.future
+		self.database.update_translation(message_id, translation)
 
 	@command_group.command(name="train", description="Trains the MythosML machine learning model.")
 	@isDeveloper()
