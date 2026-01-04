@@ -88,7 +88,7 @@ class MythosMLTranslater(commands.Cog):
 	@command_group.command(name="scrape", description="Scrapes the last 1000 messages in this channel, and adds any Mythosaur messages to the database.")
 	@isDeveloper()
 	async def scrape(self, ctx: discord.ApplicationContext):
-		await ctx.defer()
+		await ctx.defer(ephemeral=True)
 
 		message_count = 0
 		# Fetch message history with a limit (e.g., last 1000 messages)
