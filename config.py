@@ -12,3 +12,5 @@ DATA_FILE = PLUGIN_PATH + "/data.json" # Local JSON dataset file
 MODEL_PATH = PLUGIN_CACHE_PATH + "/model" # Directory to save model & tokenizer
 
 LOG_COMPONENT = "MythosML"
+
+DATABASE_PATH = PLUGIN_CACHE_PATH + "/translations.db"

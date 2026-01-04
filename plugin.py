@@ -2,7 +2,7 @@ import torch
 from torch.nn.utils.rnn import pad_sequence
 from transformers import AutoTokenizer, T5ForConditionalGeneration
 from transformers import AutoModelForSeq2SeqLM, Trainer, TrainingArguments
-from datasets import load_dataset
+from datasets import Dataset
 
 import discord
 from discord.ext import commands
@@ -13,7 +13,8 @@ from resources.shared import CONTEXTS, INTEGRATION_TYPES
 from scripts.tools import journal
 from scripts.tools.utility import isDeveloper
 
-from .config import DATA_FILE, MODEL_NAME, MODEL_PATH, LOG_COMPONENT
+from .config import MODEL_NAME, MODEL_PATH, LOG_COMPONENT, DATABASE_PATH
+from .database import TranslationDatabase
 
 
 class MythosTranslatorView(discord.ui.DesignerView):
@@ -35,6 +36,7 @@ class MythosMLTranslater(commands.Cog):
 	model = None
 	tokenizer = None
 	device = "cpu"
+	database = TranslationDatabase()
 
 	command_group = SlashCommandGroup("mythosml", "The MythosML translator", contexts=CONTEXTS, integration_types=INTEGRATION_TYPES)
 
@@ -161,23 +163,33 @@ class MythosMLTranslater(commands.Cog):
 		# ===== LOAD DATASET =====
 		journal.log("[Training] Loading dataset...", 5, component=LOG_COMPONENT)
 		await ctx.edit(content="Loading dataset...")
-		dataset = load_dataset("json", data_files=DATA_FILE)["train"]
+		with self.database.connect_db() as db:
+			dataset = Dataset.from_sql(
+				sql="""
+SELECT *
+FROM translations
+WHERE message_text IS NOT NULL
+	AND translation IS NOT NULL
+""",
+				con=db
+			)
 		journal.log(f"[Training] Dataset loaded: {len(dataset)} samples", 5, component=LOG_COMPONENT)
 
 		# ===== TOKENIZATION =====
 		def preprocess(example):
 			# Convert raw text to token IDs
-			model_input = self.tokenizer(example["input"], max_length=256, truncation=True)
-			labels = self.tokenizer(example["output"], max_length=256, truncation=True)["input_ids"]
+			model_input = self.tokenizer(example["message_text"], max_length=256, truncation=True)
+			labels = self.tokenizer(example["translation"], max_length=256, truncation=True)["input_ids"]
 			model_input["labels"] = torch.tensor(labels, dtype=torch.long)  # Labels must be tensor
 			return model_input
 
 		journal.log("[Training] Tokenizing dataset...", 5, component=LOG_COMPONENT)
 		await ctx.edit(content="Tokenizing dataset...")
 		tokenized_dataset = dataset.map(preprocess, batched=False)
-		tokenized_dataset = tokenized_dataset.remove_columns(["input", "output"])
+		tokenized_dataset = tokenized_dataset.remove_columns(["message_text", "translation", "message_id"])
 		tokenized_dataset.set_format(type="torch")
 		journal.log("[Training] Tokenization complete.", 5, component=LOG_COMPONENT)
+		print(tokenized_dataset, flush=True)
 
 		# ===== DATA COLLATOR =====
 		class FastDataCollator:
