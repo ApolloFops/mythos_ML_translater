@@ -131,6 +131,10 @@ class MythosMLTranslater(commands.Cog):
 
 		await self.train_model(ctx)
 
+		await ctx.edit(content="Reloading model...")
+
+		self.load_model()
+
 		await ctx.edit(content="Finished training!")
 
 	def translate(self, text: str) -> str:
