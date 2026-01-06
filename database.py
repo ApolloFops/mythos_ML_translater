@@ -9,6 +9,7 @@ class TranslationDatabaseQueries:
 	create_translation_table = """
 CREATE TABLE IF NOT EXISTS translations (
 	message_text TEXT NOT NULL CHECK (message_text <> ''),
+	channel_id TEXT,
 	message_id TEXT,
 	translation TEXT
 )
@@ -20,13 +21,13 @@ SELECT EXISTS(SELECT 1 FROM translations WHERE message_id = "{message_id}" LIMIT
 
 	write_message = """
 INSERT INTO
-	translations (message_text, message_id)
+	translations (message_text, channel_id, message_id)
 VALUES
-	(?, ?);
+	(?, ?, ?);
 """
 
 	find_random_untranslated = """
-SELECT message_id, message_text
+SELECT channel_id, message_id, message_text
 FROM translations
 WHERE translation IS NULL OR translation = ''
 ORDER BY RANDOM()
@@ -36,6 +37,12 @@ LIMIT 1
 	update_translation = """
 UPDATE translations
 SET translation = ?
+WHERE message_id = ?
+"""
+
+	update_channel_id = """
+UPDATE translations
+SET channel_id = ?
 WHERE message_id = ?
 """
 
@@ -66,7 +73,7 @@ class TranslationDatabase:
 	def add_message(self, message: discord.Message):
 		with self.connect_db() as db:
 			# There might be a better way to do this but this works
-			db.cursor().execute(TranslationDatabaseQueries.write_message, (message.content, str(message.id)))
+			db.cursor().execute(TranslationDatabaseQueries.write_message, (message.content, str(message.channel.id), str(message.id)))
 
 			db.commit()
 
@@ -77,3 +84,7 @@ class TranslationDatabase:
 	def update_translation(self, message_id, translation):
 		with self.connect_db() as db:
 			db.cursor().execute(TranslationDatabaseQueries.update_translation, (translation, message_id))
+
+	def update_channel_id(self, message_id, channel_id):
+		with self.connect_db() as db:
+			db.cursor().execute(TranslationDatabaseQueries.update_translation, (channel_id, message_id))

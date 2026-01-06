@@ -112,13 +112,31 @@ class MythosMLTranslater(commands.Cog):
 			await ctx.respond("No messages left to translate!", ephemeral=True)
 			return
 
-		message_id, message_text = message
+		channel_id, message_id, message_text = message
 
 		modal = TranslationModal(message_text=message_text)
 		await ctx.send_modal(modal)
 
 		translation = await modal.future
 		self.database.update_translation(message_id, translation)
+
+	@command_group.command(name="update_channel_ids", description="Add channel IDs to messages that are missing them.")
+	@isDeveloper()
+	async def update_channel_ids(self, ctx: discord.ApplicationContext):
+		await ctx.defer(ephemeral=True)
+
+		message_count = 0
+		# Fetch message history with a limit (e.g., last 1000 messages)
+		# Fetching all messages in a large server can take a very long time.
+		async for message in ctx.channel.history(limit=1000):
+			if self.database.check_for_translation(message.id):
+				self.database.update_channel_id(message.id, message.channel.id)
+				message_count += 1
+
+		if message_count > 0:
+			await ctx.respond(f"Updated {message_count} messages from this channel.", ephemeral=True)
+		else:
+			await ctx.respond("No messages found in this channel.", ephemeral=True)
 
 	@command_group.command(name="train", description="Trains the MythosML machine learning model.")
 	@isDeveloper()
