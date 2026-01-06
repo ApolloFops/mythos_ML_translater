@@ -106,7 +106,25 @@ class MythosMLTranslater(commands.Cog):
 
 	@command_group.command(name="contribute", description="Contribute some translations to the database!")
 	async def contribute(self, ctx: discord.ApplicationContext):
-		message = self.database.get_random_untranslated()
+		accessible_channels = set()
+
+		# Figure out what channels the user can access to prevent leaking messages
+		for guild in self.bot.guilds:
+			member = guild.get_member(ctx.author.id)
+			if member is None:
+				journal.log(f"Could not find member {ctx.author.id} in the cache! Fetching it from the API", 7, component=LOG_COMPONENT)
+				try:
+					member = await guild.fetch_member(ctx.author.id)
+				except discord.NotFound:
+					continue
+
+			for channel in guild.channels:
+				if isinstance(channel, discord.abc.GuildChannel):
+					permissions = channel.permissions_for(member)
+					if permissions.read_messages:
+						accessible_channels.add(channel.id)
+
+		message = self.database.get_random_untranslated(accessible_channels)
 
 		if not message:
 			await ctx.respond("No messages left to translate!", ephemeral=True)

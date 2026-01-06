@@ -29,7 +29,8 @@ VALUES
 	find_random_untranslated = """
 SELECT channel_id, message_id, message_text
 FROM translations
-WHERE translation IS NULL OR translation = ''
+WHERE (translation IS NULL OR translation = '')
+AND channel_id IN ({parameter_placeholders})
 ORDER BY RANDOM()
 LIMIT 1
 """
@@ -77,9 +78,11 @@ class TranslationDatabase:
 
 			db.commit()
 
-	def get_random_untranslated(self):
+	def get_random_untranslated(self, channel_filter):
+		placeholders = ",".join("?" for _ in channel_filter)
+
 		with self.connect_db() as db:
-			return self.read_db(db, TranslationDatabaseQueries.find_random_untranslated)
+			return db.cursor().execute(TranslationDatabaseQueries.find_random_untranslated.format(parameter_placeholders=placeholders), list(map(str, channel_filter))).fetchone()
 
 	def update_translation(self, message_id, translation):
 		with self.connect_db() as db:
