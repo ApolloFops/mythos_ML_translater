@@ -90,17 +90,18 @@ class MythosMLTranslater(commands.Cog):
 	async def scrape(self, ctx: discord.ApplicationContext):
 		await ctx.defer(ephemeral=True)
 
-		message_count = 0
+		messages = []
 		# Fetch message history with a limit (e.g., last 1000 messages)
 		# Fetching all messages in a large server can take a very long time.
 		async for message in ctx.channel.history(limit=1000):
 			if message.author.id == MYTHOSAUR_USER_ID and message.content != '':
 				if not self.database.check_for_translation(message.id):
-					self.database.add_message(message)
-					message_count += 1
+					messages.append(message)
 
-		if message_count > 0:
-			await ctx.respond(f"Scraped {message_count} messages from this channel.", ephemeral=True)
+		self.database.add_messages(messages)
+
+		if len(messages) > 0:
+			await ctx.respond(f"Scraped {len(messages)} messages from this channel.", ephemeral=True)
 		else:
 			await ctx.respond("No messages found in this channel.", ephemeral=True)
 

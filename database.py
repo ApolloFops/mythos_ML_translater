@@ -1,6 +1,7 @@
 import sqlite3
 
 import discord
+from typing import List
 
 from .config import DATABASE_PATH
 
@@ -71,10 +72,10 @@ class TranslationDatabase:
 
 		return str(in_database) == "1"
 
-	def add_message(self, message: discord.Message):
+	def add_messages(self, messages: List[discord.Message]):
 		with self.connect_db() as db:
-			# There might be a better way to do this but this works
-			db.cursor().execute(TranslationDatabaseQueries.write_message, (message.content, str(message.channel.id), str(message.id)))
+			for message in messages:
+				db.cursor().execute(TranslationDatabaseQueries.write_message, (message.content, str(message.channel.id), str(message.id)))
 
 			db.commit()
 
