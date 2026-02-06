@@ -2,11 +2,13 @@ import sqlite3
 
 import discord
 from typing import List
+from datetime import datetime
 
 from .config import DATABASE_PATH
 
 
 class TranslationDatabaseQueries:
+	# Translations
 	create_translation_table = """
 CREATE TABLE IF NOT EXISTS translations (
 	message_text TEXT NOT NULL CHECK (message_text <> ''),
@@ -48,19 +50,55 @@ SET channel_id = ?
 WHERE message_id = ?
 """
 
+	get_current_translated_count = """
+SELECT COUNT(*) FROM translations WHERE translation IS NOT NULL AND translation != '';
+"""
+
+	# Metadata
+	create_metadata_table = """
+CREATE TABLE IF NOT EXISTS metadata (
+	id INTEGER PRIMARY KEY CHECK (id = 1),
+	last_train_message_count INTEGER NOT NULL DEFAULT 0,
+	last_train_date TEXT NOT NULL DEFAULT (datetime('now'))
+);
+"""
+
+	insert_initial_metadata = """
+INSERT OR IGNORE INTO metadata (id) VALUES (1);
+"""
+
+	get_new_translations_since_last_train = """
+SELECT
+	(SELECT COUNT(*) FROM translations WHERE translation IS NOT NULL AND translation != '') -
+	last_train_message_count
+FROM metadata WHERE id = 1;
+"""
+
+	get_last_train_date = """
+SELECT last_train_date FROM metadata WHERE id = 1;
+"""
+
+	update_metadata_after_train = """
+UPDATE metadata
+SET last_train_message_count = (
+		SELECT COUNT(*) FROM translations WHERE translation IS NOT NULL AND translation != ''
+	),
+	last_train_date = datetime('now')
+WHERE id = 1;
+"""
+
 
 class TranslationDatabase:
 	def __init__(self):
 		# Make sure the table exists in the database
 		with self.connect_db() as db:
-			self.exec_db(db, TranslationDatabaseQueries.create_translation_table)
+			db.cursor().execute(TranslationDatabaseQueries.create_metadata_table)
+			db.cursor().execute(TranslationDatabaseQueries.insert_initial_metadata)
+			db.cursor().execute(TranslationDatabaseQueries.create_translation_table)
+			db.commit()
 
 	def connect_db(self):
 		return sqlite3.connect(DATABASE_PATH)
-
-	def exec_db(self, connection: sqlite3.Connection, query: str):
-		connection.cursor().execute(query)
-		connection.commit()
 
 	def read_db(self, connection: sqlite3.Connection, query: str):
 		return connection.cursor().execute(query).fetchone()
@@ -92,3 +130,22 @@ class TranslationDatabase:
 	def update_channel_id(self, message_id, channel_id):
 		with self.connect_db() as db:
 			db.cursor().execute(TranslationDatabaseQueries.update_translation, (channel_id, message_id))
+
+	def get_current_translated_count(self):
+		with self.connect_db() as db:
+			return self.read_db(db, TranslationDatabaseQueries.get_current_translated_count)[0]
+
+	def get_new_translations_since_last_train(self):
+		with self.connect_db() as db:
+			return self.read_db(db, TranslationDatabaseQueries.get_new_translations_since_last_train)[0]
+
+	def get_last_train_date(self):
+		with self.connect_db() as db:
+			timestamp = self.read_db(db, TranslationDatabaseQueries.get_last_train_date)[0]
+			# SQLite datetime('now') uses UTC by default
+			return datetime.strptime(timestamp, "%Y-%m-%d %H:%M:%S")
+
+	def update_metadata_after_train(self):
+		with self.connect_db() as db:
+			db.cursor().execute(TranslationDatabaseQueries.update_metadata_after_train)
+			db.commit()

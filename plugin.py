@@ -34,6 +34,23 @@ class MythosTranslatorView(discord.ui.DesignerView):
 		super().add_item(container)
 
 
+class MythosTranslatorInfoView(discord.ui.DesignerView):
+	def __init__(self, translated_messages, translated_messages_since_train, last_train_date):
+		super().__init__(timeout=None)
+
+		container = discord.ui.Container(colour=discord.Colour.blurple())
+
+		title_text = discord.ui.TextDisplay("### Mythos ML - Information")
+		container.add_item(title_text)
+
+		stats_display = discord.ui.TextDisplay(f"""Translated messages: {translated_messages}
+Last train: <t:{int(last_train_date.timestamp())}:f>
+Translated messages since train: {translated_messages_since_train}""")
+		container.add_item(stats_display)
+
+		super().add_item(container)
+
+
 class TranslationModal(discord.ui.DesignerModal):
 	def __init__(self, message_text):
 		super().__init__(title="Contribute Translation")
@@ -84,6 +101,14 @@ class MythosMLTranslater(commands.Cog):
 		avat       = message.author.display_avatar.url
 
 		await ctx.respond(view=MythosTranslatorView(self.translate(text)))
+
+	@command_group.command(name="info", description="Gives some statistics about the MythosML bot.")
+	async def de_mythos(self, ctx: discord.ApplicationContext):
+		translated_messages = self.database.get_current_translated_count()
+		translated_messaegs_since_train = self.database.get_new_translations_since_last_train()
+		last_train_date = self.database.get_last_train_date()
+
+		await ctx.respond(view=MythosTranslatorInfoView(translated_messages, translated_messaegs_since_train, last_train_date))
 
 	@command_group.command(name="scrape", description="Scrapes the last 1000 messages in this channel, and adds any Mythosaur messages to the database.")
 	@isDeveloper()
@@ -338,6 +363,8 @@ WHERE message_text IS NOT NULL
 		trainer.save_model(MODEL_PATH)
 		self.tokenizer.save_pretrained(MODEL_PATH)
 		journal.log(f"[Training] Model saved to {MODEL_PATH}", 5, component=LOG_COMPONENT)
+
+		self.database.update_metadata_after_train()
 
 
 def setup(bot):
