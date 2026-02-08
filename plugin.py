@@ -103,7 +103,7 @@ class MythosMLTranslater(commands.Cog):
 		await ctx.respond(view=MythosTranslatorView(self.translate(text)))
 
 	@command_group.command(name="info", description="Gives some statistics about the MythosML bot.")
-	async def de_mythos(self, ctx: discord.ApplicationContext):
+	async def info(self, ctx: discord.ApplicationContext):
 		translated_messages = self.database.get_current_translated_count()
 		translated_messaegs_since_train = self.database.get_new_translations_since_last_train()
 		last_train_date = self.database.get_last_train_date()
