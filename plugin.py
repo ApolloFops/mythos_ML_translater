@@ -61,10 +61,11 @@ class TranslationModal(discord.ui.DesignerModal):
 		message_text_display = discord.ui.TextDisplay(message_text)
 		super().add_item(message_text_display)
 
+		message_source_display = discord.ui.TextDisplay("Message Source\n```markdown\n" + message_text + "\n```")
+		super().add_item(message_source_display)
+
 		translation_input = discord.ui.Label(label="Translation")
-
 		translation_input.set_input_text(custom_id="translation")
-
 		super().add_item(translation_input)
 
 	async def callback(self, interaction: discord.Interaction):
