@@ -69,7 +69,7 @@ class TranslationModal(discord.ui.DesignerModal):
 		super().add_item(translation_input)
 
 	async def callback(self, interaction: discord.Interaction):
-		translation = self.children[1].get_item("translation").value
+		translation = self.children[2].get_item("translation").value
 
 		self.future.set_result(translation)
 
