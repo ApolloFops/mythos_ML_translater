@@ -355,14 +355,14 @@ WHERE message_text IS NOT NULL
 		# ===== TRAIN =====
 		journal.log("[Training] Starting training...", 5, component=LOG_COMPONENT)
 		await ctx.edit(content="Training model...")
-		trainer.train()
+		await asyncio.to_thread(trainer.train)
 		journal.log("[Training] Training complete.", 5, component=LOG_COMPONENT)
 
 		# ===== SAVE MODEL =====
 		journal.log("[Training] Saving final model...", 5, component=LOG_COMPONENT)
 		await ctx.edit(content="Saving model...")
-		trainer.save_model(MODEL_PATH)
-		self.tokenizer.save_pretrained(MODEL_PATH)
+		await asyncio.to_thread(trainer.save_model, MODEL_PATH)
+		await asyncio.to_thread(self.tokenizer.save_pretrained, MODEL_PATH)
 		journal.log(f"[Training] Model saved to {MODEL_PATH}", 5, component=LOG_COMPONENT)
 
 		self.database.update_metadata_after_train()
